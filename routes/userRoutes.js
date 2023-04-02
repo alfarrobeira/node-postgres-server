@@ -5,6 +5,7 @@ import {
   getUser,
   editUser,
   deleteUser,
+  getUserOrders,
   flagInactive
 } from "../controllers/user.js";
 
@@ -32,11 +33,10 @@ userRoutes
     deleteUser(req, res).then((result) => res.json(result));
   })
 
-    // ToDo
-  // // return all the orders of a user
-  // .get("/:id/orders", (req, res) => {
-  //   userOrders(req).then((result) => res.json(result));
-  // });
+  // return all the orders of a user
+  .get("/:id/orders", (req, res) => {
+    getUserOrders(req, res).then((result) => res.json(result));
+  })
 
     //  If a user has never ordered, he should be set as inactive
   .put("/:id/check-inactive", (req, res) => {
