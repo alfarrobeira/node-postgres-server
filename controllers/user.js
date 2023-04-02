@@ -60,4 +60,13 @@ const deleteUser = async(req, res) => {
     return user;
 }
 
-export { getUsers, createUser, getUser, editUser, deleteUser };
+const flagInactive = async(req, res) => {
+    const { id } = req.params;
+    const query = "UPDATE users SET active=false WHERE NOT EXISTS (SELECT * FROM orders WHERE orders.user_id = users.id) AND users.id = $1 RETURNING *";  
+
+    const { rows } = await dbPool.query(query, [id]);
+
+    return rows;
+}
+
+export { getUsers, createUser, getUser, editUser, deleteUser, flagInactive };

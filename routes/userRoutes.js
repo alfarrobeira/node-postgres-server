@@ -5,6 +5,7 @@ import {
   getUser,
   editUser,
   deleteUser,
+  flagInactive
 } from "../controllers/user.js";
 
 const userRoutes = Router();
@@ -38,8 +39,8 @@ userRoutes
   // });
 
     //  If a user has never ordered, he should be set as inactive
-//   .put("/:id/check-inactive", (req, res) => {
-//     flagInactive(req.params.id).then((result) => res.json(result));
-//   });
+  .put("/:id/check-inactive", (req, res) => {
+    flagInactive(req, res).then((result) => res.json(result));
+  });
 
 export default userRoutes;
